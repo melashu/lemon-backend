@@ -1,17 +1,10 @@
 class ProfilesController < ApplicationController
 
     def update
-        # begin
-        #     @current_user.update!(user_prams) 
-        #     render json: { message: "Successfuly updated!" }, status: 200
-        # raise e
-        #     render json: user_prams.values , status: 403
-        # end
-    #   if @current_user.update_columns(user_prams.keys, user_prams.values) 
-    #      render json: { message: "Successfuly updated!" }, status: 200
-    #   else
-    #      render json: user_prams.values , status: 403
-    #   end
+       @current_user.update!(user_prams)
+       render json: { message: 'Successfuly updated' }, status: 200
+       rescue ActiveRecord::RecordInvalid => e
+       render json: { error: e.message }, status: 422
     end
 
     def my_profile
@@ -21,6 +14,10 @@ class ProfilesController < ApplicationController
     private
 
     def user_prams
-        params.permit(:first_name, :last_name, :country, :city, :phone, :about, :linkedin, :facebook, :twitter, :website)
+        params.permit(:first_name, :password, :last_name, :country, :city, :phone, :about, :linkedin, :facebook, :twitter, :website)
     end
+
+    # private 
+
+
 end
