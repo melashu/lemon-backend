@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    render json: { item: get_item }, status: 200
+    render json:  ItemSerializer.new(get_item).serializable_hash, status: 200
   end
 
   def destroy
@@ -33,9 +33,9 @@ class ItemsController < ApplicationController
   end
 
   def get_others_item;
-     render json: {items: Item.includes(:useraccount)
-      .where.not(useraccount: @current_user)
-      .where('quantity > 0')}, status: 200
+    items = Item.includes(:useraccount).where.not(useraccount: @current_user)
+      .where('quantity > 0')
+     render json: ItemSerializer.new(items).serializable_hash, status: 200
   end
 
   def public_item
