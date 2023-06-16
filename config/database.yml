@@ -19,17 +19,15 @@ development:
   host: localhost
   username: postgres
   password: meshu
-  # password: 12@34
-
 test:
   <<: *default
   database: lemon_test_backend
-  # host: localhost
-  # port: 4556
-  # adapter: postgresql
-  # encoding: unicode
-  # username: postgres
-  # password: 12@34
+  adapter: postgresql
+  encoding: unicode
+  port: 4556
+  host: localhost
+  username: postgres
+  password: meshu
 
 production:
   <<: *default
