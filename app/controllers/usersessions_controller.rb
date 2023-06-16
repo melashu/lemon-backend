@@ -4,7 +4,7 @@ include JWTConcern
 skip_before_action :must_log!, only: [:sign_up, :sign_in]
 
 def all_user
-    render json: Useraccount.all, status: 200
+    render json: Useraccount.select(:id, :first_name, :last_name, :email, :country, :city, :phone, :about, :linkedin, :facebook, :twitter, :website).where(admin: false), status: 200
 end
     
 def sign_up
